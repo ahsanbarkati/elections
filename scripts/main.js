@@ -3,7 +3,11 @@
 var stateIndex = 0;
 
 // Setup the app
-angular.module('electionsApp', ['ui.router', 'LocalStorageModule', 'ui.bootstrap']);
+angular.module('electionsApp', ['ui.router', 'LocalStorageModule', 'ui.bootstrap'], function ($compileProvider) {
+
+  $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|chrome-extension):/);
+
+});
 
 // Setup the router
 angular.module('electionsApp')
