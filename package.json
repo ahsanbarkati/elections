@@ -1,6 +1,6 @@
 {
   "name": "iitk-general-elections",
-  "version": "1.0.0",
+  "version": "2018.1.0",
   "description": "Voting system for IITK General Elections",
   "main": "index.html",
   "scripts": {
@@ -9,7 +9,8 @@
     "start": "run --x64 --mirror https://dl.nwjs.io/ ."
   },
   "build": {
-    "nwVersion": "0.27.4"
+    "nwVersion": "0.27.4",
+    "targets": ["zip"]
   },
   "keywords": [
     "IITK",
@@ -22,11 +23,6 @@
     "min_height": 600,
     "position": "mouse",
     "fullscreen": true
-  },
-  "webkit": {
-    "plugin": false,
-    "java": false,
-    "page-cache": false
   },
   "author": "Srijan R Shetty <srijan.shetty+code@gmail.com> (http://srijanshetty.in/)",
   "license": "MIT",
