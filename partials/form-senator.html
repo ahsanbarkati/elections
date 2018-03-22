@@ -4,18 +4,20 @@
             <img class="candidate-image" src="{{candidate.image}}">
             <h3>{{candidate.name}}</h3>
             <div>
-                <p>
+                <label>
                     <input type="radio" name="candidate-first" ng-model="formData.senatorFirst" value="{{candidate.id}}">
                     1st Preference
-                </p>
-                <p ng-show="candidateList.length > 2">
+                </label>
+                <br>
+                <label ng-show="candidateList.length > 2">
                     <input type="radio" name="candidate-second" ng-model="formData.senatorSecond" value="{{candidate.id}}">
                     2nd Preference
-                </p>
-                <p ng-show="candidateList.length > 3">
+                </label>
+                <br>
+                <label ng-show="candidateList.length > 3">
                     <input type="radio" name="candidate-third" ng-model="formData.senatorThird" value="{{candidate.id}}">
                     3rd Preference
-                </p>
+                </label>
             </div>
         </div>
     </div>
