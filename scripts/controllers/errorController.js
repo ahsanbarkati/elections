@@ -9,6 +9,16 @@ angular.module('electionsApp')
             $modalInstance.dismiss('cancel');
         };
     })
+    .controller('allPreferencesErrorController', function threePreferencesErrorController($modalInstance, $scope) {
+        $scope.error = {};
+        $scope.error.name = 'Validation Error';
+        $scope.error.msg = 'Please enter all preferences';
+
+        // Dismiss the modal
+        $scope.dismiss = function () {
+            $modalInstance.dismiss('cancel');
+        };
+    })
     .controller('twoPreferencesErrorController', function twoPreferencesErrorController($modalInstance, $scope) {
         $scope.error = {};
         $scope.error.name = 'Validation Error';

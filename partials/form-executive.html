@@ -1,20 +1,14 @@
 <form ng-submit="processSubmit()">
     <div class="row">
         <div class="candidate-cell text-center" ng-repeat="candidate in candidateList" ng-class="candidateClass">
-            <img class="candidate-image" src="{{candidate.image}}">
+            <img class="candidate-image" ng-src="{{candidate.image}}" alt="{{candidate.name}}">
             <h3>{{candidate.name}}</h3>
             <div>
-                <p>
-                    <input type="radio" name="candidate-first" ng-model="selectionData.postFirst" value="{{candidate.id}}">
-                    1st Preference
-                </p>
-                <p ng-show="candidateList.length > 2">
-                    <input type="radio" name="candidate-second" ng-model="selectionData.postSecond" value="{{candidate.id}}">
-                    2nd Preference
-                </p>
-                <p ng-show="candidateList.length > 3">
-                    <input type="radio" name="candidate-third" ng-model="selectionData.postThird" value="{{candidate.id}}">
-                    3rd Preference
+                <p ng-repeat="_candidate in candidateList">
+                  <input
+                    type="radio"
+                    name="candidate-{{$index}}" ng-model="selectionData[$index]" value="{{candidate.id}}">
+                    Preference {{ $index + 1 }}
                 </p>
             </div>
         </div>

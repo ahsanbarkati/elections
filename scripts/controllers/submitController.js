@@ -27,9 +27,7 @@ angular.module('electionsApp')
                     var positionNoPreference = localStorageService.get(item + 'NoPreference') || 0;
                     localStorageService.set(item + 'NoPreference', positionNoPreference + 1);
                 } else {
-                    setPreference($scope.formData[item + 'First'], 1);
-                    setPreference($scope.formData[item + 'Second'], 1);
-                    setPreference($scope.formData[item + 'Third'], 1);
+                    setPreference($scope.formData[item + 'All'].join('-'), 1);
                 }
 
             });

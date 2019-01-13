@@ -26,6 +26,6 @@
     "bootswatch-dist": "3.3.0-lumen",
     "fontface-source-sans-pro": "*",
     "angular-local-storage": "~0.1.5",
-    "lodash": "~3.0.0"
+    "lodash": "~3.10.0"
   }
 }

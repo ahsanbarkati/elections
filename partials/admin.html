@@ -72,20 +72,16 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Name</th>
-                    <th>1st Preference</th>
-                    <th>2nd Preference</th>
-                    <th>3rd Preference</th>
+                    <th>Names</th>
+                    <th>Vote Count</th>
                 </tr>
             </thead>
 
             <tbody>
-                <tr ng-repeat="gensec in gensecs | filter:{ position: post}">
+                <tr ng-repeat="gensecs in postGensecMap[post]">
                     <td>{{$index + 1}}</td>
-                    <td>{{gensec.name}}</td>
-                    <td>{{getVotes(gensec.id, 1)}}</td>
-                    <td>{{getVotes(gensec.id, 2)}}</td>
-                    <td>{{getVotes(gensec.id, 3)}}</td>
+                    <td style="white-space: pre-wrap;">{{getNames(gensecs)}}</td>
+                    <td>{{getGensecVotes(gensecs)}}</td>
                 </tr>
             </tbody>
         </table>

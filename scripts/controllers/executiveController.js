@@ -9,11 +9,7 @@ angular.module('electionsApp')
         $scope.candidateList = _.shuffle(dataFactory.getCandidates(currentState));
 
         // Create the selectionData object
-        $scope.selectionData = {
-            'postFirst': '',
-            'postSecond': '',
-            'postThird': ''
-        };
+        $scope.selectionData = _.fill(Array($scope.candidateList.length), null);
 
         // Setup the way the candidates will be displayed
         if ($scope.candidateList.length >= 3) {
@@ -35,9 +31,7 @@ angular.module('electionsApp')
             $scope.formData[currentState + 'NoPreference'] = true;
 
             // Clear others
-            $scope.formData[currentState + 'First'] = '';
-            $scope.formData[currentState + 'Second'] = '';
-            $scope.formData[currentState + 'Third'] = '';
+            $scope.formData[currentState + 'All'] = [];
 
             // Set the next state
             localStorageService.set('nextState', nextState);
@@ -47,37 +41,16 @@ angular.module('electionsApp')
         // Process the submit request
         $scope.processSubmit = function () {
             // Make sure the correct number of choices have been entered
-            if ($scope.candidateList.length >= 4) {
-                if (!$scope.selectionData.postFirst || !$scope.selectionData.postSecond || !$scope.selectionData.postThird) {
-                    $modal.open({
-                        templateUrl: 'partials/errorModal.html',
-                        controller: 'threePreferencesErrorController'
-                    });
-                    return;
-                }
-            } else if ($scope.candidateList.length === 3) {
-                if (!$scope.selectionData.postFirst || !$scope.selectionData.postSecond) {
-                    $modal.open({
-                        templateUrl: 'partials/errorModal.html',
-                        controller: 'twoPreferencesErrorController'
-                    });
-                    return;
-                }
-            } else if ($scope.candidateList.length >= 1) {
-                if (!$scope.selectionData.postFirst) {
-                    $modal.open({
-                        templateUrl: 'partials/errorModal.html',
-                        controller: 'onePreferenceErrorController'
-                    });
-                    return;
-                }
+            if (_.some($scope.selectionData, function(value) { return value == null; })) {
+                $modal.open({
+                    templateUrl: 'partials/errorModal.html',
+                    controller: 'allPreferencesErrorController'
+                });
+                return;
             }
 
             // The choice of candidates must be distinct
-            if (($scope.candidateList.length > 2) &&
-                (($scope.selectionData.postFirst === $scope.selectionData.postSecond) ||
-                ($scope.selectionData.postSecond === $scope.selectionData.postThird) ||
-                ($scope.selectionData.postThird === $scope.selectionData.postFirst))) {
+            if (_.uniq($scope.selectionData).length !== $scope.candidateList.length) {
                 $modal.open({
                     templateUrl: 'partials/errorModal.html',
                     controller: 'choiceErrorController'
@@ -89,9 +62,7 @@ angular.module('electionsApp')
             $scope.formData[currentState + 'NoPreference'] = false;
 
             // Pass on the preferences
-            $scope.formData[currentState + 'First'] = $scope.selectionData.postFirst;
-            $scope.formData[currentState + 'Second'] = $scope.selectionData.postSecond;
-            $scope.formData[currentState + 'Third'] = $scope.selectionData.postThird;
+            $scope.formData[currentState + 'All'] = $scope.selectionData;
 
             // Set the next state
             localStorageService.set('nextState', nextState);
