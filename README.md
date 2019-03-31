@@ -39,10 +39,10 @@ $ sudo apt install libgconf2-4
 $ npm run start
 ```
 
-- Run the following command to build binaries for win64 and linux64 in the *build/* directory.
+- Run the following command to build binaries for win64 and linux64 in the *build/* directory. (Replace build_linux with build_win or build_mac for the type of operating system in your device).
 
 ```shell
-$ npm run build
+$ npm run build_linux
 ```
 
 - Use the corresponding binaries in *build/iitk-general-elections*.
