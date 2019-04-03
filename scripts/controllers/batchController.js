@@ -1,12 +1,14 @@
 angular.module('electionsApp')
     .controller('batchController', function batchController($state, $scope, localStorageService, $modal) {
         // Skip this step if there are no items in the list
+        var nextState = $state.current.nextStateAfterSenator;
         if ( !$scope.batches || $scope.batches.length === 0) {
             // Set the next state
-            localStorageService.set('nextState', 'president');
+
+            localStorageService.set('nextState', nextState);
 
             // Redirect to president
-            $state.go('form.president');
+            $state.go('form.'+nextState);
         }
 
         // Process the submit request

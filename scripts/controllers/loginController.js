@@ -5,7 +5,16 @@ angular.module('electionsApp')
 
         // Process Submit
         $scope.processLoginSubmit = function() {
-            if ($scope.password && $scope.password === dataFactory.settings.mainPassword) {
+            if (dataFactory.settings.mainPassword == dataFactory.settings.adminPassword){
+                $modal.open({
+                    templateUrl: 'partials/errorModal.html',
+                    controller: 'loginError2Controller'
+                });
+
+                $scope.password = '';
+                
+            }
+            else if ($scope.password && $scope.password === dataFactory.settings.mainPassword) {
                 // Setup state variables
                 localStorageService.set('isLoggedIn', true);
                 localStorageService.set('nextState', 'batch');
@@ -28,10 +37,19 @@ angular.module('electionsApp')
     .controller('loginErrorController', function loginErrorController($modalInstance, $scope) {
         $scope.error = {};
         $scope.error.name = 'Login Error';
-        $scope.error.msg = 'Please enter a valid password';
-
+        $scope.error.msg = 'Please enter a valid password'; 
+        // Dismiss the modal
+        $scope.dismiss = function () {
+            $modalInstance.dismiss('cancel');
+        };
+    })
+    .controller('loginError2Controller', function loginError2Controller($modalInstance, $scope) {
+        $scope.error = {};
+        $scope.error.name = 'Login Error';
+        $scope.error.msg = 'Vote and Admin password are same. They should be kept different.'; 
         // Dismiss the modal
         $scope.dismiss = function () {
             $modalInstance.dismiss('cancel');
         };
     });
+    

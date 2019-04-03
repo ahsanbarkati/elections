@@ -76,6 +76,9 @@ angular.module('electionsApp')
 
         // Clear all the data
         $scope.clear = function() {
-            // localStorageService.clearAll();
+            if(dataFactory.clear_enable == true){
+               localStorageService.clearAll(); 
+            }
+            
         };
     });
